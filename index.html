@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POP - A Plataforma com os Maiores Bônus do Brasil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            red: '#B91C1C',
+                            dark: '#7F1D1D',
+                            crimson: '#DC2626',
+                            light: '#FECACA',
+                            accent: '#EF4444'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+            color: #1f2937;
+        }
+
+        .header-sticky {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 2px solid #e5e7eb;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .promo-banner {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 2px solid #e5e7eb;
+        }
+
+        .streaming-badge {
+            background: linear-gradient(45deg, #DC2626 0%, #B91C1C 100%);
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 8px 20px rgba(220, 38, 38, 0.3);
+            border: 2px solid rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .live-badge {
+            background: linear-gradient(45deg, #EF4444 0%, #DC2626 100%);
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
+            animation: pulse 1.5s infinite;
+            border: 2px solid rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 12px 30px rgba(239, 68, 68, 0.6); }
+            100% { transform: scale(1); box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4); }
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #DC2626 0%, #B91C1C 100%);
+            border: 3px solid rgba(255,255,255,0.3);
+            padding: 20px 45px;
+            border-radius: 50px;
+            font-weight: 900;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 35px rgba(220, 38, 38, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 45px rgba(220, 38, 38, 0.5);
+            background: linear-gradient(45deg, #EF4444 0%, #DC2626 100%);
+        }
+
+        .cta-button:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .platform-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid #e5e7eb;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        .platform-card:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(220, 38, 38, 0.15);
+            border-color: #FECACA;
+        }
+
+        .social-button {
+            background: linear-gradient(45deg, #7F1D1D 0%, #B91C1C 100%);
+            border: 2px solid rgba(255,255,255,0.2);
+            padding: 15px 30px;
+            border-radius: 25px;
+            color: white;
+            font-weight: 700;
+            margin: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(127, 29, 29, 0.3);
+        }
+
+        .social-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(127, 29, 29, 0.4);
+            background: linear-gradient(45deg, #B91C1C 0%, #DC2626 100%);
+        }
+
+        .customer-service-btn {
+            background: linear-gradient(45deg, #DC2626 0%, #B91C1C 100%);
+            border: 3px solid rgba(255,255,255,0.3);
+            padding: 18px 35px;
+            border-radius: 25px;
+            color: white;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 35px rgba(220, 38, 38, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .customer-service-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(220, 38, 38, 0.5);
+            background: linear-gradient(45deg, #EF4444 0%, #DC2626 100%);
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            backdrop-filter: blur(10px);
+        }
+
+        .popup-content {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            border: 3px solid #e5e7eb;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 32px;
+            color: #6b7280;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            transform: rotate(90deg) scale(1.2);
+            color: #DC2626;
+        }
+
+        .form-input {
+            background: #f9fafb;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 16px;
+            color: #1f2937;
+            width: 100%;
+            margin-bottom: 18px;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #DC2626;
+            background: white;
+            box-shadow: 0 0 25px rgba(220, 38, 38, 0.2);
+        }
+
+        .form-input::placeholder {
+            color: #9ca3af;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #DC2626 0%, #B91C1C 100%);
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 18px;
+            border-radius: 12px;
+            color: white;
+            font-weight: 800;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 25px rgba(220, 38, 38, 0.3);
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(220, 38, 38, 0.4);
+            background: linear-gradient(45deg, #EF4444 0%, #DC2626 100%);
+        }
+
+        .submit-btn:disabled {
+            background: #6b7280;
+            cursor: not-allowed;
+            transform: none;
+            border-color: #d1d5db;
+        }
+
+        .error {
+            border-color: #ef4444 !important;
+            background: rgba(239, 68, 68, 0.05) !important;
+        }
+
+        .success {
+            border-color: #10b981 !important;
+            background: rgba(16, 185, 129, 0.05) !important;
+        }
+
+        .slider {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin: 30px 0;
+            border: 3px solid #e5e7eb;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 18px;
+        }
+
+        .slide-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 10;
+        }
+
+        .indicator {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.7);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .indicator.active {
+            background: #DC2626;
+            transform: scale(1.3);
+            box-shadow: 0 0 15px rgba(220, 38, 38, 0.8);
+        }
+
+        .groups-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 2px solid #e5e7eb;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+        }
+
+        .social-icon {
+            font-size: 24px;
+            margin-right: 12px;
+        }
+
+        .section-title {
+            background: linear-gradient(135deg, #7F1D1D 0%, #B91C1C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @media (max-width: 768px) {
+            .promo-banner {
+                flex-direction: column;
+            }
+            
+            .platforms-grid {
+                grid-template-columns: 1fr 1fr !important;
+            }
+            
+            .social-buttons {
+                flex-direction: column !important;
+            }
+            
+            .popup-content {
+                width: 95%;
+                padding: 25px;
+            }
+            
+            .cta-button {
+                padding: 16px 35px;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .platforms-grid {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .cta-button {
+                padding: 14px 30px;
+                font-size: 1rem;
+                letter-spacing: 1px;
+            }
+            
+            .slider {
+                height: 200px;
+            }
+        }
+
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="header-sticky py-5 px-6">
+        <div class="max-w-6xl mx-auto text-center">
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-800">
+                POP: A plataforma com os maiores bônus do Brasil!
+            </h1>
+            <p class="text-sm md:text-base text-gray-600 mt-2">
+                Porque onde há gratidão, há generosidade.
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8">
+        <!-- Promotional Banner -->
+        <div class="promo-banner flex flex-col md:flex-row items-center mb-12">
+            <div class="w-full md:w-1/3 p-6 flex justify-center">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3cf42cad-0bad-41cf-98c9-20cda303e18f.png" alt="Promotional image showing happy users enjoying POP platform bonuses and rewards with clean white background" class="w-64 h-64 rounded-full object-cover shadow-2xl border-4 border-red-100" />
+            </div>
+            <div class="w-full md:w-2/3 p-8 text-center md:text-left">
+                <div class="flex justify-center md:justify-start gap-4 mb-6">
+                    <span class="streaming-badge">STREAMING</span>
+                    <span class="live-badge">LIVE</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+                    Junte-se à Revolução dos Bônus!
+                </h2>
+                <button class="cta-button" onclick="openPopup()">
+                    REGISTRE-SE AGORA!!! <i class="fas fa-mouse-pointer ml-3"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Registration Links -->
+        <section class="mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 section-title">
+                REGISTRE-SE EM NOSSAS PLATAFORMAS
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 platforms-grid">
+                <div class="platform-card">
+                    <h3 class="font-bold text-lg text-gray-800">POPBRA</h3>
+                    <a href="#" class="text-red-600 hover:text-red-800 text-sm mt-3 inline-block font-medium">Registrar Agora</a>
+                </div>
+                <div class="platform-card">
+                    <h3 class="font-bold text-lg text-gray-800">POP888</h3>
+                    <a href="#" class="text-red-600 hover:text-red-800 text-sm mt-3 inline-block font-medium">Registrar Agora</a>
+                </div>
+                <div class="platform-card">
+                    <h3 class="font-bold text-lg text-gray-800">POP678</h3>
+                    <a href="#" class="text-red-600 hover:text-red-800 text-sm mt-3 inline-block font-medium">Registrar Agora</a>
+                </div>
+                <div class="platform-card">
+                    <h3 class="font-bold text-lg text-gray-800">POPPG</h3>
+                    <a href="#" class="text-red-600 hover:text-red-800 text-sm mt-3 inline-block font-medium">Registrar Agora</a>
+                </div>
+                <div class="platform-card">
+                    <h3 class="font-bold text-lg text-gray-800">POP555</h3>
+                    <a href="#" class="text-red-600 hover:text-red-800 text-sm mt-3 inline-block font-medium">Registrar Agora</a>
+                </div>
+                <div class="platform-card">
+                    <h3 class="font-bold text-lg text-gray-800">POPLUA</h3>
+                    <a href="#" class="text-red-600 hover:text-red-800 text-sm mt-3 inline-block font-medium">Registrar Agora</a>
+                </div>
+                <div class="platform-card">
+                    <h3 class="font-bold text-lg text-gray-800">POPCEU</h3>
+                    <a href="#" class="text-red-600 hover:text-red-800 text-sm mt-3 inline-block font-medium">Registrar Agora</a>
+                </div>
+                <div class="platform-card">
+                    <h3 class="font-bold text-lg text-gray-800">POPBEM</h3>
+                    <a href="#" class="text-red-600 hover:text-red-800 text-sm mt-3 inline-block font-medium">Registrar Agora</a>
+                </div>
+                <div class="platform-card">
+                    <h3 class="font-bold text-lg text-gray-800">POPBOA</h3>
+                    <a href="#" class="text-red-600 hover:text-red-800 text-sm mt-3 inline-block font-medium">Registrar Agora</a>
+                </div>
+                <div class="platform-card">
+                    <h3 class="font-bold text-lg text-gray-800">POPWB</h3>
+                    <a href="#" class="text-red-600 hover:text-red-800 text-sm mt-3 inline-block font-medium">Registrar Agora</a>
+                </div>
+                <div class="platform-card">
+                    <h3 class="font-bold text-lg text-gray-800">POPDEZ</h3>
+                    <a href="#" class="text-red-600 hover:text-red-800 text-sm mt-3 inline-block font-medium">Registrar Agora</a>
+                </div>
+                <div class="platform-card">
+                    <h3 class="font-bold text-lg text-gray-800">POPMEL</h3>
+                    <a href="#" class="text-red-600 hover:text-red-800 text-sm mt-3 inline-block font-medium">Registrar Agora</a>
+                </div>
+                <div class="platform-card">
+                    <h3 class="font-bold text-lg text-gray-800">26BET</h3>
+                    <a href="#" class="text-red-600 hover:text-red-800 text-sm mt-3 inline-block font-medium">Registrar Agora</a>
+                </div>
+                <div class="platform-card">
+                    <h3 class="font-bold text-lg text-gray-800">POPKKK</h3>
+                    <a href="#" class="text-red-600 hover:text-red-800 text-sm mt-3 inline-block font-medium">Registrar Agora</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Group Links Section -->
+        <section class="groups-section text-center">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 section-title">
+                JUNTE-SE AOS NOSSOS GRUPOS
+            </h2>
+            <div class="flex flex-wrap justify-center social-buttons">
+                <button class="social-button">
+                    <i class="fab fa-telegram social-icon"></i>
+                    Telegram Group
+                </button>
+                <button class="social-button">
+                    <i class="fab fa-whatsapp social-icon"></i>
+                    WhatsApp Group
+                </button>
+                <button class="social-button">
+                    <i class="fab fa-facebook social-icon"></i>
+                    Facebook Group
+                </button>
+            </div>
+        </section>
+
+        <!-- Sliding Banner -->
+        <div class="slider">
+            <div class="slide active">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b03cbd86-84d5-48d2-b217-10f4b3e2e451.png" alt="Promotional banner 1 showing exclusive bonuses and rewards with clean white background" />
+            </div>
+            <div class="slide">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e7b434b3-4b38-4696-b22d-615a9dd86053.png" alt="Promotional banner 2 featuring live streaming events and special offers on white background" />
+            </div>
+            <div class="slide">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/208dde0e-564b-4bcc-96fe-936e4ba206de.png" alt="Promotional banner 3 highlighting new platform features and user benefits with white theme" />
+            </div>
+            <div class="slide-indicators">
+                <div class="indicator active" onclick="showSlide(0)"></div>
+                <div class="indicator" onclick="showSlide(1)"></div>
+                <div class="indicator" onclick="showSlide(2)"></div>
+            </div>
+        </div>
+
+        <!-- Customer Service Button -->
+        <div class="text-center mt-8">
+            <button class="customer-service-btn" onclick="window.open('https://t.me/your_customer_service', '_blank')">
+                <i class="fas fa-headset mr-3"></i>
+                FALE COM O ATENDIMENTO
+            </button>
+        </div>
+    </main>
+
+    <!-- Registration Popup -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">CADASTRO POP</h2>
+            <form id="registrationForm">
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2 font-semibold">NÚMERO DE WHATSAPP:</label>
+                    <input type="tel" id="whatsapp" class="form-input" placeholder="+55 (00) 00000-0000" required 
+                           pattern="\+55\s\(\d{2}\)\s\d{5}-\d{4}">
+                    <small class="text-gray-500 text-sm">Formato: +55 (00) 00000-0000</small>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2 font-semibold">NOME COMPLETO:</label>
+                    <input type="text" id="name" class="form-input" placeholder="Nome e CPF devem coincidir" required>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2 font-semibold">CEP:</label>
+                    <input type="text" id="cep" class="form-input" placeholder="01311-200" required 
+                           pattern="\d{5}-\d{3}">
+                    <small class="text-gray-500 text-sm">Digite o CEP no formato 00000-000</small>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2 font-semibold">ESTADO:</label>
+                    <select id="state" class="form-input" onchange="updateCities()" required>
+                        <option value="">Selecione um estado</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="PR">Paraná</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="BA">Bahia</option>
+                        <option value="DF">Distrito Federal</option>
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2 font-semibold">CIDADE:</label>
+                    <input type="text" id="city" class="form-input" placeholder="Escolha seu estado primeiro" required readonly>
+                    <small class="text-gray-500 text-sm">Use a ESTADO-CIDADE correta conforme o CEP</small>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2 font-semibold">BAIRRO:</label>
+                    <input type="text" id="neighborhood" class="form-input" placeholder="Ex: Moema, Barra da Tijuca" required>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2 font-semibold">RUA / AVENIDA:</label>
+                    <input type="text" id="street" class="form-input" placeholder="Ex: Rua das Flores, Avenida Paulista" required>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2 font-semibold">NÚMERO:</label>
+                    <input type="text" id="number" class="form-input" placeholder="45 ou 'SN'" required>
+                    <small class="text-gray-500 text-sm">Digite "SN" se não houver número</small>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2 font-semibold">COMPLEMENTO/REFERÊNCIAS:</label>
+                    <input type="text" id="complement" class="form-input" placeholder="Apto 101, Conj. 3, Bloco B">
+                </div>
+
+                <button type="submit" id="submitButton" class="submit-btn">
+                    ENVIAR CADASTRO
+                </button>
+                <p id="errorMessage" class="text-red-600 text-center mt-3 font-semibold"></p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Slider functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const indicators = document.querySelectorAll('.indicator');
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            indicators[index].classList.add('active');
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        // Auto-rotate slides every 2 seconds
+        setInterval(nextSlide, 2000);
+
+        // Popup functionality
+        function openPopup() {
+            document.getElementById('popup').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Form validation
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const whatsapp = document.getElementById('whatsapp').value;
+            const submitButton = document.getElementById('submitButton');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Simulate duplicate check
+            const existingNumbers = ['+55 (11) 99999-9999', '+55 (21) 88888-8888'];
+            
+            if (existingNumbers.includes(whatsapp)) {
+                submitButton.classList.add('error');
+                submitButton.disabled = true;
+                errorMessage.textContent = 'Número já registrado! Por favor, use outro número.';
+                submitButton.classList.add('shake');
+                setTimeout(() => submitButton.classList.remove('shake'), 500);
+            } else {
+                submitButton.classList.remove('error');
+                submitButton.classList.add('success');
+                errorMessage.textContent = '';
+                
+                // Simulate successful submission
+                setTimeout(() => {
+                    alert('Cadastro realizado com sucesso! Os dados serão enviados.');
+                    closePopup();
+                    document.getElementById('registrationForm').reset();
+                    submitButton.classList.remove('success');
+                    submitButton.disabled = false;
+                }, 1000);
+            }
+        });
+
+        // CEP mask
+        document.getElementById('cep').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 5) {
+                value = value.substring(0, 5) + '-' + value.substring(5, 8);
+            }
+            e.target.value = value;
+        });
+
+        // WhatsApp mask
+        document.getElementById('whatsapp').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.startsWith('55')) {
+                value = value.substring(2);
+            }
+            if (value.length > 0) {
+                value = '+55 (' + value;
+                if (value.length > 8) {
+                    value = value.substring(0, 8) + ') ' + value.substring(8);
+                }
+                if (value.length > 14) {
+                    value = value.substring(0, 14) + '-' + value.substring(14, 18);
+                }
+            }
+            e.target.value = value;
+        });
+
+        // Update cities based on state selection
+        function updateCities() {
+            const state = document.getElementById('state').value;
+            const cityInput = document.getElementById('city');
+            
+            if (state) {
+                cityInput.removeAttribute('readonly');
+                const cities = {
+                    'SP': 'São Paulo',
+                    'RJ': 'Rio de Janeiro',
+                    'MG': 'Belo Horizonte',
+                    'RS': 'Porto Alegre',
+                    'PR': 'Curitiba',
+                    'SC': 'Florianópolis',
+                    'BA': 'Salvador',
+                    'DF': 'Brasília'
+                };
+                cityInput.value = cities[state] || '';
+            } else {
+                cityInput.setAttribute('readonly', true);
+                cityInput.value = '';
+            }
+        }
+
+        // Close popup when clicking outside
+        window.addEventListener('click', function(e) {
+            const popup = document.getElementById('popup');
+            if (e.target === popup) {
+                closePopup();
+            }
+        });
+    </script>
+</body>
+</html>
